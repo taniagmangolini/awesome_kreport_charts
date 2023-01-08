@@ -1,8 +1,12 @@
+# pip installed python packages
 import pandas as pd
+
+# imports from other files
 from utils.command import CommandSet
 
 
 class KreportProcessor(object):
+    """Kreport file processor."""
 
     def __init__(self, commands: CommandSet):
         self.commands = commands
@@ -12,6 +16,7 @@ class KreportProcessor(object):
         """Process the Kraken Style Report (kreport).
         Exclude non used levels (U, R1 and R2).
         At the end, filter sublevels."""
+        
         kreport = pd.read_csv(self.commands.kreport_file,
                               sep='\t',
                               names=['per_node',
@@ -35,6 +40,7 @@ class KreportProcessor(object):
         Sublevels are levels followed by a number (Ex: G1) and
         unclassified is denoted by U.
         """
+
         regex = "[A-Z]\d+"
         self.kreport = self.kreport[self.kreport['level'] != 'U']
         self.kreport = self.kreport[~self.kreport['level'].str.contains(regex)]

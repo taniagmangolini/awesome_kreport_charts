@@ -1,5 +1,21 @@
-from pathlib import Path
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+
+__autor__ = "Tania Girao Mangolini"
+__credits__ = ["Tania Girao Mangolini"]
+__Lisence__ = "BSD"
+__mantainer__ = "Tania Girao Mangolini"
+__email__= "taniagmangolini@gmail.com"
+__status__= "Development"
+__version__= "0.0.1"
+
+# Default python packages
 import argparse
+import logging
+from pathlib import Path
+
+# imports from other files
 from file_processor import KreportProcessor
 from charts.sankey_chart import SankeyChart
 from utils.command import CommandSet
@@ -95,4 +111,4 @@ if __name__ == '__main__':
         sankey.plot_sankey()
 
     except Exception as e:
-        print('[ERROR]', e)
+        logging.error('[ERROR]', e)
