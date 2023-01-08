@@ -54,6 +54,12 @@ parser.add_argument('-ml',
                     help='Minimum level to show (D=Domain, K=Kingdom, P=Phyllum, \
                     C=Class, O=order, F=Family, G=Genus, S=Species). Default: S.')
 
+parser.add_argument('-c',
+                    '--chart_type',
+                    choices=["sankey"],
+                    default='sankey',
+                    help='Chart type. Options: sankey. Default: sankey.')
+
 parser.add_argument('-o',
                     '--output_path',
                     required=True,
@@ -80,6 +86,7 @@ if __name__ == '__main__':
                               min_reads_archaea=args.min_qtd_archaea,
                               min_reads_eukarya=args.min_qtd_eukarya,
                               min_level=args.min_level,
+                              chart_type=args.chart_type,
                               output_path=Path(args.output_path))
 
         kreport_processor = KreportProcessor(commands)

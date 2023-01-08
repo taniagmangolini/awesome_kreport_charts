@@ -4,14 +4,15 @@ class CommandSet(object):
 
     def __init__(self,
                  kreport_file,
-                 domain,
                  output_path,
                  excluded_nodes,
+                 domain,
                  min_reads_viruses,
                  min_reads_bacteria,
                  min_reads_archaea,
                  min_reads_eukarya,
-                 min_level):
+                 min_level,
+                 chart_type):
 
         self.kreport_file = kreport_file
         self.domain = domain
@@ -22,3 +23,4 @@ class CommandSet(object):
         self.min_reads_archaea = min_reads_archaea
         self.min_reads_eukarya = min_reads_eukarya
         self.min_level = min_level
+        self.chart_type = chart_type
