@@ -46,9 +46,27 @@ class SankeyChart(object):
         for node in self.nodes:
             self._get_children_nodes(node)
 
+    def _check_node_exclusion(self, node, min_quantity):
+        """Mark node and node children as excluded
+        if they dont pass the filters."""
+        min_level = self.commands.min_level
+        if node.lvl_reads < min_quantity \
+            or node.taxid in self.commands.excluded_nodes \
+                or LEVEL_ORDER[node.level] > LEVEL_ORDER[min_level]:
+                    node.excluded = True
+                    for child in node.children:
+                        if child.taxid not in self.commands.excluded_nodes:
+                            self.commands.excluded_nodes.append(child.taxid)
+                            self._check_node_exclusion(child, min_quantity)
+
+    def _filter_nodes(self, selected_nodes, min_reads):
+        """Apply min reads, min level and taxids exclusion filters."""
+        for node in selected_nodes:
+            self._check_node_exclusion(node, min_reads)
+
     def _get_node_domain(self, node, previous_node=None):
         """Get the domain for nodes. The nodes can be in the
-        following domains: """
+        following domains: Archaea, Bacteria, Viruses or Eukarya. """
         if not node or node.name == ROOT_LEVEL:
             return previous_node.name
         return self._get_node_domain(node.parent, node)
@@ -67,16 +85,25 @@ class SankeyChart(object):
                 else:
                     self.eukarya.append(node)
 
-        self.all.extend(self.viruses)
-        self.all.extend(self.bacteria)
-        self.all.extend(self.archaea)
-        self.all.extend(self.eukarya)
-
         print(f'{VIRUSES}: {len(self.viruses)}, \
                 {BACTERIA}: {len(self.bacteria)}, \
                 {ARCHAEA}: {len(self.archaea)}, \
                 {EUKARYA}: {len(self.eukarya)}, \
                 total: {len(self.all)}')
+
+    def _apply_filters(self):
+        """Apply filters to domains."""
+        self._filter_nodes(self.viruses, self.commands.min_viruses)
+        self.all.extend(self.viruses)
+
+        self._filter_nodes(self.bacteria, self.commands.min_bacteria)
+        self.all.extend(self.bacteria)
+
+        self._filter_nodes(self.archaea, self.commands.min_archaea)
+        self.all.extend(self.archaea)
+
+        self._filter_nodes(self.eukarya, self.commands.min_eukarya)
+        self.all.extend(self.eukarya)
 
     def get_nodes(self):
         """Extract the hierarchy of nodes from the kreport."""
@@ -90,6 +117,7 @@ class SankeyChart(object):
             self.nodes.append(node)
         self._get_nodes_relations()
         self._set_domains()
+        self._apply_filters()
 
     def _prepare_sankey(self, selected_nodes):
         """Prepare nodes data to be represented in a Sankey Chart."""

@@ -10,25 +10,25 @@ parser = argparse.ArgumentParser()
 parser.add_argument("kreport_path")
 
 parser.add_argument('-mv',
-                    '--min_qtd_viruses',
+                    '--min_viruses',
                     type=int,
                     default=1,
                     help="Minimum quantity of reads or contigs for Viruses. Default: 1.")
 
 parser.add_argument('-mb',
-                    '--min_qtd_bacteria',
+                    '--min_bacteria',
                     type=int,
                     default=1,
                     help="Minimum quantity of reads or contigs for Bacteria. Default: 1.")
 
 parser.add_argument('-ma',
-                    '--min_qtd_archaea',
+                    '--min_archaea',
                     type=int,
                     default=1,
                     help="Minimum quantity of reads or contigs for Archaea. Default: 1.")
 
 parser.add_argument('-me',
-                    '--min_qtd_eukarya',
+                    '--min_eukarya',
                     type=int,
                     default=1,
                     help="Minimum quantity of reads or contigs for Eukarya. Default: 1.")
@@ -36,7 +36,6 @@ parser.add_argument('-me',
 parser.add_argument('-d',
                     '--domain',
                     choices=["V", "B", "A", "E"],
-                    default='-',
                     help="Domains to include: V (Viruses), B (Bacteria), A (Archaea), \
                     E (Eukarya). Default: include all domains. Example of Usage: -d V")
 
@@ -81,10 +80,10 @@ if __name__ == '__main__':
         commands = CommandSet(kreport_file=Path(args.kreport_path),
                               domain=args.domain,
                               excluded_nodes=args.exclude if args.exclude else [],
-                              min_reads_viruses=args.min_qtd_viruses,
-                              min_reads_bacteria=args.min_qtd_bacteria,
-                              min_reads_archaea=args.min_qtd_archaea,
-                              min_reads_eukarya=args.min_qtd_eukarya,
+                              min_viruses=args.min_viruses,
+                              min_bacteria=args.min_bacteria,
+                              min_archaea=args.min_archaea,
+                              min_eukarya=args.min_eukarya,
                               min_level=args.min_level,
                               chart_type=args.chart_type,
                               output_path=Path(args.output_path))
