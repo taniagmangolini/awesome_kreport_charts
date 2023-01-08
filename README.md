@@ -1,6 +1,6 @@
 # Awesome Kreport Charts [under work]
 
-Create nice charts for kreports (kraken-style report):
+Create nice charts for kreports (kraken-style reports):
 
 https://ccb.jhu.edu/software/kraken/MANUAL.html#output-format
 
