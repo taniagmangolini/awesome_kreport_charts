@@ -13,7 +13,7 @@ parser.add_argument('-mv',
                     '--min_qtd_viruses',
                     type=int,
                     default=1,
-                    help="Minimum quantity of reads or contigs fpr Viruses. Default: 1.")
+                    help="Minimum quantity of reads or contigs for Viruses. Default: 1.")
 
 parser.add_argument('-mb',
                     '--min_qtd_bacteria',
@@ -46,13 +46,6 @@ parser.add_argument('-e',
                     type=int,
                     help="One or more taxon id to be ignored (use spaces for more than one). \
                     Example of usage: -e 9606 247 -- ")
-
-parser.add_argument('-s',
-                    '--sub',
-                    choices=["y", "n"],
-                    default='n',
-                    help="Include sub categories such as S1, G2, F1 etc. \
-                    Usage: y=yes; n=no. Default: n")
 
 parser.add_argument('-ml',
                     '--min_level',
@@ -87,8 +80,7 @@ if __name__ == '__main__':
                               min_reads_archaea=args.min_qtd_archaea,
                               min_reads_eukarya=args.min_qtd_eukarya,
                               min_level=args.min_level,
-                              output_path=Path(args.output_path),
-                              keep_sublevels=True if args.sub == 'y' else False)
+                              output_path=Path(args.output_path))
 
         kreport_processor = KreportProcessor(commands)
         kreport_processor.process_kreport()
@@ -97,4 +89,4 @@ if __name__ == '__main__':
         sankey.plot_sankey()
 
     except Exception as e:
-        print(['ERROR'], e)
+        print('[ERROR]', e)

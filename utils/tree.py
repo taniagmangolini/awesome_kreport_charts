@@ -1,8 +1,9 @@
+"""This class represents the nodes extracted from the Kreport."""
+
 class Tree(object):
     def __init__(self, name,
                  taxid,
                  level,
-                 level_adjusted,
                  level_id,
                  lvl_reads,
                  line_number,
@@ -19,7 +20,6 @@ class Tree(object):
         self.line_number = line_number
         self.level = level
         self.sublevel = sublevel
-        self.level_adjusted = level_adjusted
         self.level_id = level_id
         self.lvl_reads = lvl_reads
         self.color = color,

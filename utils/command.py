@@ -1,3 +1,5 @@
+"""This class represents the input line commands."""
+
 class CommandSet(object):
 
     def __init__(self,
@@ -9,8 +11,7 @@ class CommandSet(object):
                  min_reads_bacteria,
                  min_reads_archaea,
                  min_reads_eukarya,
-                 min_level,
-                 keep_sublevels):
+                 min_level):
 
         self.kreport_file = kreport_file
         self.domain = domain
@@ -21,4 +22,3 @@ class CommandSet(object):
         self.min_reads_archaea = min_reads_archaea
         self.min_reads_eukarya = min_reads_eukarya
         self.min_level = min_level
-        self.keep_sublevels = keep_sublevels

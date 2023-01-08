@@ -1,5 +1,7 @@
+from tkinter import ARC
 from utils.tree import Tree
-from utils.constants import LEVEL_ORDER, DOMAINS, ROOT_LEVEL
+from utils.constants import LEVEL_ORDER, DOMAINS, ROOT_LEVEL, VIRUSES,\
+BACTERIA, ARCHAEA, EUKARYA
 import plotly.graph_objects as go
 
 class SankeyChart(object):
@@ -15,18 +17,14 @@ class SankeyChart(object):
         self.all = []
 
     def _get_parent_node(self, node):
-        parent_level_id = LEVEL_ORDER[node.level] - 1 if len(node.level) == 1 else LEVEL_ORDER[node.level_adjusted]
+        """Iterate backwards parting from the node position
+        until find the parent node."""
+        parent_level_id = LEVEL_ORDER[node.level] - 1
 
         if node.name in DOMAINS:
             parent_level_id = 1
 
         for candidate_parent in list(reversed(self.nodes[:node.line_number])):
-            # In case of same level with different sublevels, check if parent is higher before proceed.
-            # For instance, go to next candidate if candidate parent is G2 and node is G1.
-            if (len(node.level) > 1 and len(candidate_parent.level) > 1
-                    and node.level[0] == candidate_parent.level[0]
-                    and int(node.level[1:]) < int(candidate_parent.level[1:])):
-                continue
             if (node.level != candidate_parent.level
                     and (candidate_parent.name in DOMAINS
                          or (candidate_parent.level_id <= parent_level_id
@@ -35,19 +33,22 @@ class SankeyChart(object):
                 break
 
     def _get_children_nodes(self, node):
+        """Get the child nodes for a node."""
         if node.name != ROOT_LEVEL:
             for candidate_child in self.nodes[node.line_number:]:
                 if node.taxid == candidate_child.parent.taxid:
                     node.add_child(candidate_child)
 
     def _get_nodes_relations(self):
-        """process nodes parents and children."""
+        """Process nodes parents and children."""
         for node in self.nodes:
             self._get_parent_node(node)
         for node in self.nodes:
             self._get_children_nodes(node)
 
     def _get_node_domain(self, node, previous_node=None):
+        """Get the domain for nodes. The nodes can be in the
+        following domains: """
         if not node or node.name == ROOT_LEVEL:
             return previous_node.name
         return self._get_node_domain(node.parent, node)
@@ -57,11 +58,11 @@ class SankeyChart(object):
             if node.name != ROOT_LEVEL:
                 node.domain = self._get_node_domain(node)
 
-                if node.domain == 'Viruses':
+                if node.domain == VIRUSES:
                     self.viruses.append(node)
-                elif node.domain == 'Bacteria':
+                elif node.domain == BACTERIA:
                     self.bacteria.append(node)
-                elif node.domain == 'Archaea':
+                elif node.domain == ARCHAEA:
                     self.archaea.append(node)
                 else:
                     self.eukarya.append(node)
@@ -71,30 +72,28 @@ class SankeyChart(object):
         self.all.extend(self.archaea)
         self.all.extend(self.eukarya)
 
-        print(f'viruses: {len(self.viruses)}, bacteria: {len(self.bacteria)}, \
-                archaea: {len(self.archaea)}, eukarya: {len(self.eukarya)}, \
+        print(f'{VIRUSES}: {len(self.viruses)}, \
+                {BACTERIA}: {len(self.bacteria)}, \
+                {ARCHAEA}: {len(self.archaea)}, \
+                {EUKARYA}: {len(self.eukarya)}, \
                 total: {len(self.all)}')
 
-    def _get_adjusted_level(self, level):
-        level_adjusted = level if len(level) == 1 else level[0]
-        return level_adjusted, LEVEL_ORDER[level_adjusted]
-
     def get_nodes(self):
+        """Extract the hierarchy of nodes from the kreport."""
         for line_number, line in enumerate(self.kreport.values.tolist()):
-            level_adjusted, level_adjusted_id = self._get_adjusted_level(line[2])
             node = Tree(line_number=line_number,
                         taxid=line[0],
                         name=line[1],
                         level=line[2],
-                        level_adjusted=level_adjusted,
-                        level_id=level_adjusted_id,
+                        level_id=LEVEL_ORDER[line[2]],
                         lvl_reads=line[3])
             self.nodes.append(node)
         self._get_nodes_relations()
         self._set_domains()
 
     def _prepare_sankey(self, selected_nodes):
-        labels = {0: 'root'}
+        """Prepare nodes data to be represented in a Sankey Chart."""
+        labels = {0: ROOT_LEVEL}
         sources = []
         targets = []
         values = []
@@ -138,14 +137,16 @@ class SankeyChart(object):
         return labels, sources, targets, values
 
     def plot_sankey(self):
+        """Generate the Sankey Chart and export to a HTML file in the
+        output path."""
         self.get_nodes()
-        labels, sources, targets, values = self._prepare_sankey(self.eukarya)
+        labels, sources, targets, values = self._prepare_sankey(self.archaea)
         params = {'labels': list(labels.values()),
                   'sources': sources,
                   'targets': targets,
                   'values': values}
 
-        print(f'labels, {len(labels)}, sources, {len(sources)},\
+        print(f'labels, {len(labels)}, sources, {len(sources)}, \
               values, {len(values)}, targets, {len(targets)}')
 
         fig = go.Figure(data=[go.Sankey(
@@ -161,5 +162,5 @@ class SankeyChart(object):
                 value = params['values']
             ))
         ])
-        fig.update_layout(title_text="Sankey from Kraken Report", font_size=9)
+        fig.update_layout(font_size=9)
         fig.write_html(self.commands.output_path)
