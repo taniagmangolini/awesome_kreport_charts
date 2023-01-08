@@ -1,6 +1,6 @@
-"""This class represents the nodes extracted from the Kreport."""
-
 class Tree(object):
+    """This class represents the nodes extracted from the Kreport."""
+
     def __init__(self, name,
                  taxid,
                  level,

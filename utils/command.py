@@ -1,6 +1,5 @@
-"""This class represents the input line commands."""
-
 class CommandSet(object):
+    """This class represents the input line commands."""
 
     def __init__(self,
                  kreport_file,
