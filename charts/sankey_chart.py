@@ -1,5 +1,5 @@
 from tree import Tree
-from constants import LEVEL_ORDER, DOMAINS, ROOT_LEVEL
+from utils.constants import LEVEL_ORDER, DOMAINS, ROOT_LEVEL
 import plotly.graph_objects as go
 
 class SankeyChart(object):

@@ -1,8 +1,8 @@
 from pathlib import Path
 import argparse
-from command import CommandSet
 from file_processor import KreportProcessor
-from sankey_chart import SankeyChart
+from charts.sankey_chart import SankeyChart
+from utils.command import CommandSet
 
 
 parser = argparse.ArgumentParser()

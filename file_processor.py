@@ -1,7 +1,7 @@
 import pandas as pd
-from command import CommandSet
+from utils.command import CommandSet
 from tree import Tree
-from constants import LEVEL_ORDER, DOMAINS, ROOT_LEVEL
+from utils.constants import LEVEL_ORDER, DOMAINS, ROOT_LEVEL
 
 class KreportProcessor(object):
 
