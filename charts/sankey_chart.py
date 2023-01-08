@@ -140,7 +140,7 @@ class SankeyChart(object):
         """Generate the Sankey Chart and export to a HTML file in the
         output path."""
         self.get_nodes()
-        labels, sources, targets, values = self._prepare_sankey(self.archaea)
+        labels, sources, targets, values = self._prepare_sankey(self.viruses)
         params = {'labels': list(labels.values()),
                   'sources': sources,
                   'targets': targets,
