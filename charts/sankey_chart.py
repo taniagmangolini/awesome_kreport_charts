@@ -1,4 +1,4 @@
-from tree import Tree
+from utils.tree import Tree
 from utils.constants import LEVEL_ORDER, DOMAINS, ROOT_LEVEL
 import plotly.graph_objects as go
 
