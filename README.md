@@ -10,4 +10,4 @@ python main.py --helṕ
 
 #### Usage
 
-python main.py -mv 10 --exclude 9606 8959 -o sample_files/sankey.html --  sample_files/sample.kreport
+python main.py -mb 10000 --exclude 9606 8959 -o sample_files/sankey.html -- sample_files/sample.kreport
