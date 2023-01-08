@@ -9,6 +9,9 @@ class KreportProcessor(object):
         self.kreport = None
 
     def process_kreport(self):
+        """Process the Kraken Style Report (kreport).
+        Exclude non used levels (U, R1 and R2).
+        At the end, filter sublevels if necessary."""
         kreport = pd.read_csv(self.commands.kreport_file,
                               sep='\t',
                               names=['per_node',
@@ -27,13 +30,14 @@ class KreportProcessor(object):
                            + kreport['taxon_name'].astype(str)
         kreport = kreport[['taxon', 'taxid', 'taxon_name', 'level', 'tot_taxon']]
         kreport.set_index('taxon', inplace=True)
+
         self.kreport = kreport
         self.filter_sublevels()
 
     def filter_sublevels(self):
+        """Filter or keep the sublevels according to
+        the keep_sublevels command.
+        Sublevels are levels followed by a number. Ex: G1."""
         if not self.commands.keep_sublevels:
-            self.kreport = self.kreport[~self.kreport['level'].str.contains("[A-Z]\d+")]
-
-    def filter_sublevels(self):
-        if not self.commands.keep_sublevels:
-            self.kreport = self.kreport[~self.kreport['level'].str.contains("[A-Z]\d+")]
+            regex = "[A-Z]\d+"
+            self.kreport = self.kreport[~self.kreport['level'].str.contains(regex)]
