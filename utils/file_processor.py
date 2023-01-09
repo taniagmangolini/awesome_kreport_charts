@@ -2,7 +2,7 @@
 import pandas as pd
 
 # imports from other files
-from utils.command import CommandSet
+from models.command import CommandSet
 
 
 class KreportProcessor(object):
@@ -16,7 +16,7 @@ class KreportProcessor(object):
         """Process the Kraken Style Report (kreport).
         Exclude non used levels (U, R1 and R2).
         At the end, filter sublevels."""
-        
+
         kreport = pd.read_csv(self.commands.kreport_file,
                               sep='\t',
                               names=['per_node',

@@ -16,9 +16,9 @@ import logging
 from pathlib import Path
 
 # imports from other files
-from file_processor import KreportProcessor
+from utils.file_processor import KreportProcessor
 from charts.sankey_chart import SankeyChart
-from utils.command import CommandSet
+from models.command import CommandSet
 
 
 parser = argparse.ArgumentParser()
