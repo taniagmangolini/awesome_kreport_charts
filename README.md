@@ -8,6 +8,6 @@ To know more about kreports: https://ccb.jhu.edu/software/kraken/MANUAL.html#out
 
 python main.py --helṕ
 
-#### Usage
+#### Usage sample
 
-python main.py -mb 10000 --exclude 9606 8959 -o sample_files/sankey.html -- sample_files/sample.kreport
+python3 awesome-kreport-charts -mb 10000 --exclude 9606 8959 -o sample_files/sankey.html -- sample_files/sample.kreport
