@@ -15,7 +15,7 @@ To know more about kreports: https://ccb.jhu.edu/software/kraken/MANUAL.html#out
 
 ```cd awesome_kreport_charts```
 
-```python3 awesome-kreport-charts/setup.py install```
+```python3 setup.py install```
 
 
 #### Help
