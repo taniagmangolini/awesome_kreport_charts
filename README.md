@@ -12,6 +12,6 @@ python main.py --helṕ
 
 python3 awesome-kreport-charts -mb 10000 --exclude 9606 8959 -o sample_files/sankey.html -- sample_files/sample.kreport
 
-### Install dependencies:
+#### Install dependencies:
 
 To install dependencies, run: python3 awesome-kreport-charts/setup.py install
