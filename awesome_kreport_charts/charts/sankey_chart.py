@@ -202,12 +202,14 @@ class SankeyChart(object):
                 pad = 15,
                 thickness = 5,
                 line = dict(color = "black", width = 0.5),
-                label = params['labels']
+                label = params['labels'],
+                hovertemplate = '%{label}: %{value}<extra></extra>'
             ),
             link = dict(
                 source = params['sources'],
                 target = params['targets'],
-                value = params['values']
+                value = params['values'],
+                hovertemplate = '%{source.label}-> %{target.label}<extra></extra>'
             ))
         ])
         fig.update_layout(font_size=9)
