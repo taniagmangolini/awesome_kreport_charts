@@ -39,7 +39,7 @@ More info: https://pypi.org/project/awesome-kreport-charts/0.0.2/
 
 #### Import as a package
 
-You can import it as module to your own project and generate the charts as the example below:
+You can import it to your own project and generate the charts as the example below:
 
 ```
 from awesome_kreport_charts.models.command import CommandSet
