@@ -4,11 +4,11 @@
 
 __autor__ = "Tania Girao Mangolini"
 __credits__ = ["Tania Girao Mangolini"]
-__Lisence__ = "BSD"
+__License__ = "BSD"
 __mantainer__ = "Tania Girao Mangolini"
 __email__= "taniagmangolini@gmail.com"
 __status__= "Development"
-__version__= "0.0.1"
+__version__= "0.0.2"
 
 # Default python packages
 import argparse
@@ -29,25 +29,29 @@ parser.add_argument('-mv',
                     '--min_viruses',
                     type=int,
                     default=1,
-                    help="Minimum quantity of reads or contigs for Viruses. Default: 1.")
+                    help="Minimum quantity of reads or contigs for Viruses.\
+                        Default: 1.")
 
 parser.add_argument('-mb',
                     '--min_bacteria',
                     type=int,
                     default=1,
-                    help="Minimum quantity of reads or contigs for Bacteria. Default: 1.")
+                    help="Minimum quantity of reads or contigs for Bacteria.\
+                        Default: 1.")
 
 parser.add_argument('-ma',
                     '--min_archaea',
                     type=int,
                     default=1,
-                    help="Minimum quantity of reads or contigs for Archaea. Default: 1.")
+                    help="Minimum quantity of reads or contigs for Archaea.\
+                        Default: 1.")
 
 parser.add_argument('-me',
                     '--min_eukarya',
                     type=int,
                     default=1,
-                    help="Minimum quantity of reads or contigs for Eukarya. Default: 1.")
+                    help="Minimum quantity of reads or contigs for Eukarya.\
+                        Default: 1.")
 
 parser.add_argument('-d',
                     '--domain',
@@ -79,6 +83,12 @@ parser.add_argument('-o',
                     '--output_path',
                     required=True,
                     help='Chart output path.')
+
+parser.add_argument('-v',
+                    '--version',
+                    action='version',
+                    version='%(prog)s {version}'.format(version=__version__),
+                    help='Show the current version.')
 
 args = parser.parse_args()
 

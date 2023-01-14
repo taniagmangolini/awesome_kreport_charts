@@ -5,9 +5,14 @@ import logging
 import plotly.graph_objects as go
 
 # imports from other files
-from models.tree import Tree
-from utils.constants import LEVEL_ORDER, DOMAINS, ROOT_LEVEL, VIRUSES,\
-BACTERIA, ARCHAEA, EUKARYA
+try:
+    from models.tree import Tree
+    from utils.constants import LEVEL_ORDER, DOMAINS, ROOT_LEVEL, VIRUSES,\
+        BACTERIA, ARCHAEA, EUKARYA
+except ImportError as e:
+    from ..models.tree import Tree
+    from ..utils.constants import LEVEL_ORDER, DOMAINS, ROOT_LEVEL, VIRUSES,\
+        BACTERIA, ARCHAEA, EUKARYA
 
 
 class SankeyChart(object):

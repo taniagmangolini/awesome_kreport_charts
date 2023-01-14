@@ -2,7 +2,10 @@
 import pandas as pd
 
 # imports from other files
-from models.command import CommandSet
+try:
+    from models.command import CommandSet
+except ImportError as e:
+   from ..models.command import CommandSet
 
 
 class KreportProcessor(object):
