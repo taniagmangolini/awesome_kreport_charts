@@ -9,7 +9,7 @@ To know more about kreports: https://ccb.jhu.edu/software/kraken/MANUAL.html#out
 
 ##### Install with pip:
 
-pip install awesome-kreport-charts==0.0.2
+```pip install awesome-kreport-charts==0.0.2```
 
 More info: https://pypi.org/project/awesome-kreport-charts/0.0.2/
 
@@ -25,6 +25,12 @@ More info: https://pypi.org/project/awesome-kreport-charts/0.0.2/
 #### Help
 
 ```python main.py --helṕ```
+
+
+#### History
+
+* 0.0.1: first release
+* 0.0.2: add project info
 
 
 #### Usage sample
@@ -57,7 +63,3 @@ kreport_processor.process_kreport()
 sankey = SankeyChart(kreport_processor.kreport, commands)
 sankey.plot_sankey()```
 
-#### History
-
-* 0.0.1: first release
-* 0.0.2: add project info
