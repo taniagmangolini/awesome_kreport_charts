@@ -1,4 +1,4 @@
-# Awesome Kreport Charts [under work]
+# Awesome Kreport Charts
 
 Create awesome charts for kreports (kraken-style reports):
 
