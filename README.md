@@ -33,7 +33,7 @@ More info: https://pypi.org/project/awesome-kreport-charts/0.0.2/
 * 0.0.2: add project info
 
 
-#### Usage sample
+#### Usage as a command line tool
 
 ```python3 awesome_kreport_charts -mb 10000 --exclude 9606 8959 -o sample_files/sankey.html -- sample_files/sample.kreport```
 
