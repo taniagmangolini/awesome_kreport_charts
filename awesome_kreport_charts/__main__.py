@@ -18,66 +18,70 @@ from pathlib import Path
 # imports from other files
 from utils.file_processor import KreportProcessor
 from charts.sankey_chart import SankeyChart
+from charts.sunburst_chart import SunBurstChart
 from models.command import CommandSet
 
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("kreport_path")
+parser.add_argument('kreport_path')
 
 parser.add_argument('-mv',
                     '--min_viruses',
                     type=int,
                     default=1,
-                    help="Minimum quantity of reads or contigs for Viruses.\
-                        Default: 1.")
+                    help='Minimum quantity of reads or contigs for Viruses.\
+                        Default: 1.')
 
 parser.add_argument('-mb',
                     '--min_bacteria',
                     type=int,
                     default=1,
-                    help="Minimum quantity of reads or contigs for Bacteria.\
-                        Default: 1.")
+                    help='Minimum quantity of reads or contigs for Bacteria.\
+                        Default: 1.')
 
 parser.add_argument('-ma',
                     '--min_archaea',
                     type=int,
                     default=1,
-                    help="Minimum quantity of reads or contigs for Archaea.\
-                        Default: 1.")
+                    help='Minimum quantity of reads or contigs for Archaea.\
+                        Default: 1.')
 
 parser.add_argument('-me',
                     '--min_eukarya',
                     type=int,
                     default=1,
-                    help="Minimum quantity of reads or contigs for Eukarya.\
-                        Default: 1.")
+                    help='Minimum quantity of reads or contigs for Eukarya.\
+                        Default: 1.')
 
 parser.add_argument('-d',
                     '--domain',
                     choices=["V", "B", "A", "E"],
-                    help="Domains to include: V (Viruses), B (Bacteria), A (Archaea), \
-                    E (Eukarya). Default: include all domains. Example of Usage: -d V")
+                    help='Domains to include: V (Viruses), B (Bacteria), A (Archaea), \
+                    E (Eukarya). Default: include all domains. Example of Usage: -d V')
 
 parser.add_argument('-e',
                     '--exclude',
-                    nargs="*",
+                    nargs='*',
                     type=int,
-                    help="One or more taxon id to be ignored (use spaces for more than one). \
-                    Example of usage: -e 9606 247 -- ")
+                    help='One or more taxon id to be ignored (use spaces for more than one). \
+                    Example of usage: -e 9606 247 -- ')
 
 parser.add_argument('-ml',
                     '--min_level',
-                    choices=["D", "K", "P", "C", "O", "F", "G", "S"],
+                    choices=['D', 'K', 'P', 'C', 'O', 'F', 'G', 'S'],
                     default='S',
                     help='Minimum level to show (D=Domain, K=Kingdom, P=Phyllum, \
                     C=Class, O=order, F=Family, G=Genus, S=Species). Default: S.')
 
 parser.add_argument('-c',
                     '--chart_type',
-                    choices=["sankey"],
+                    choices=['sankey', 'sunburst'],
                     default='sankey',
-                    help='Chart type. Options: sankey. Default: sankey.')
+                    help='Chart type. Options: sankey or sunburst. Default: sankey.\
+                          Sunbust is only supported for Viruses, Bacteria, Archaea or \
+                          Eukarya.The support to show all domains chart will be \
+                          available soon. ')
 
 parser.add_argument('-o',
                     '--output_path',
@@ -95,10 +99,10 @@ args = parser.parse_args()
 kreport_path = Path(args.kreport_path)
 
 if not kreport_path.exists():
-    parser.exit(1, message="[ERROR] Kreport file not found.")
+    parser.exit(1, message='[ERROR] Kreport file not found.')
 
 if not args.output_path:
-    parser.exit(1, message="[ERROR] Output path should be provided.")
+    parser.exit(1, message='[ERROR] Output path should be provided.')
 
 if __name__ == '__main__':
 
@@ -117,8 +121,11 @@ if __name__ == '__main__':
         kreport_processor = KreportProcessor(commands)
         kreport_processor.process_kreport()
 
-        sankey = SankeyChart(kreport_processor.kreport, commands)
-        sankey.plot_sankey()
+        if commands.chart_type == 'sankey':
+            chart = SankeyChart(kreport_processor.kreport, commands)
+        if commands.chart_type == 'sunburst':
+            chart = SunBurstChart(kreport_processor.kreport, commands)
+        chart.plot()
 
     except Exception as e:
         logging.error('[ERROR]', e)

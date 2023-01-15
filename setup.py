@@ -8,7 +8,7 @@ setup(
     author_email="tania.mangolini@gmail.com",
     description="Create awesome charts for kreports (kraken-style reports)",
     url="https://github.com/taniagmangolini/awesome_kreport_charts",
-    version="0.0.2",
+    version="1.0.0",
     packages=find_packages(),
     install_requires=["pandas==1.1.5",
                       "plotly==5.3.1"],
