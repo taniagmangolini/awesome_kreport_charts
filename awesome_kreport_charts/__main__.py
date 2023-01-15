@@ -4,11 +4,11 @@
 
 __autor__ = "Tania Girao Mangolini"
 __credits__ = ["Tania Girao Mangolini"]
-__License__ = "BSD"
+__License__ = "BSD0"
 __mantainer__ = "Tania Girao Mangolini"
 __email__= "taniagmangolini@gmail.com"
-__status__= "Development"
-__version__= "0.0.2"
+__status__= "Production"
+__version__= "1.0.1"
 
 # Default python packages
 import argparse

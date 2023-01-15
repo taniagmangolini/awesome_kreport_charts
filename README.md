@@ -12,9 +12,9 @@ To know more about kreports: https://ccb.jhu.edu/software/kraken/MANUAL.html#out
 
 ##### Install with pip:
 
-```pip install awesome-kreport-charts==1.0.0```
+```pip install awesome-kreport-charts==1.0.1```
 
-More info: https://pypi.org/project/awesome-kreport-charts/1.0.0/
+More info: https://pypi.org/project/awesome-kreport-charts/1.0.1/
 
 ##### Install from source:
 
