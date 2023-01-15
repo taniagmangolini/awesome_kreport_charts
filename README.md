@@ -2,7 +2,7 @@
 
 Create awesome charts for kreports (kraken-style reports).
 The following charts are available: sankey and sunburst.
-It is possible to show all domains, or selected some domain to show (Viruses, Bacteria, Archaea, Eukarya).
+It is possible to show all domains, or selected some domain to show (Viruses, Bacteria, Archaea or Eukarya).
 You can also to apply filters such as minimum reads/contigs and exclude taxons.
 
 To know more about kreports: https://ccb.jhu.edu/software/kraken/MANUAL.html#output-format
