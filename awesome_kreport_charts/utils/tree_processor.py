@@ -184,13 +184,13 @@ class TreeProcessor(object):
                     labels[node.index] = node.name
 
                 sources.append(node.index)
-                values.append(node.lvl_reads)
 
                 if not child.index:
                     index = index + 1
                     child.index = index
 
                 targets.append(child.index)
+                values.append(child.lvl_reads)
 
                 if child.index not in labels:
                     labels[child.index] = child.name

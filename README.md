@@ -1,7 +1,7 @@
 # Awesome Kreport Charts
 
 Create awesome charts for kreports (kraken-style reports).
-The following charts are available: sankey and sunburst.
+The following charts are available: sankey, sunburst_no_values and sunburst_values (see the sample_files).
 It is possible to show all domains, or select some domain to show (Viruses, Bacteria, Archaea or Eukarya).
 You can also apply filters such as minimum reads/contigs and exclude taxons.
 
@@ -12,9 +12,9 @@ To know more about kreports: https://ccb.jhu.edu/software/kraken/MANUAL.html#out
 
 ##### Install with pip:
 
-```pip install awesome-kreport-charts==1.0.1```
+```pip install awesome-kreport-charts==1.1.0```
 
-More info: https://pypi.org/project/awesome-kreport-charts/1.0.1/
+More info: https://pypi.org/project/awesome-kreport-charts/1.1.0/
 
 ##### Install from source:
 
@@ -37,14 +37,15 @@ Use the following command to see all the options:
 * 0.0.1: first release
 * 0.0.2: add project info
 * 1.0.0: add sunburst chart
+* 1.1.0: add sunburst_values and sunburst_no_values charts, fix sunburst values to child values and all domains.
 
 #### Usage as a command line tool
 
 ```python3 awesome_kreport_charts -mb 10000 --exclude 9606 8959 -o sample_files/sankey.html -- sample_files/sample.kreport```
 
-SunBurst chart is only support for Viruses, Bacteria, Archaea or Eukarya. Soon it will be available to all domains together.
+```python3 awesome_kreport_charts --min_bacteria 10  --chart sunburst_no_values -o sample_files/sunburst__no_values_all.html -- sample_files/sample.kreport```
 
-```python3 awesome_kreport_charts --min_bacteria 100 --domain B --chart sunburst -o sample_files/sunburst-bacteria.html -- sample_files/sample.kreport```
+```python3 awesome_kreport_charts --min_bacteria 10  --chart sunburst_values -o sample_files/sunburst__values_all.html -- sample_files/sample.kreport```
 
 
 #### Import as a package

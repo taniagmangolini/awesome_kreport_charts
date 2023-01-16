@@ -8,7 +8,7 @@ __License__ = "BSD0"
 __mantainer__ = "Tania Girao Mangolini"
 __email__= "taniagmangolini@gmail.com"
 __status__= "Production"
-__version__= "1.0.1"
+__version__= "1.1.0"
 
 # Default python packages
 import argparse
@@ -19,7 +19,9 @@ from pathlib import Path
 from utils.file_processor import KreportProcessor
 from charts.sankey_chart import SankeyChart
 from charts.sunburst_chart import SunBurstChart
+
 from models.command import CommandSet
+from utils.constants import SUNBURST_NO_VALUES, SUNBURST_VALUES
 
 
 parser = argparse.ArgumentParser()
@@ -76,9 +78,10 @@ parser.add_argument('-ml',
 
 parser.add_argument('-c',
                     '--chart_type',
-                    choices=['sankey', 'sunburst'],
+                    choices=['sankey', 'sunburst_no_values', 'sunburst_values'],
                     default='sankey',
-                    help='Chart type. Options: sankey or sunburst. Default: sankey.\
+                    help='Chart type. Options: sankey, sunburst-no-values, sunburst-values.\
+                          Default: sankey.\
                           Sunbust is only supported for Viruses, Bacteria, Archaea or \
                           Eukarya.The support to show all domains chart will be \
                           available soon. ')
@@ -123,7 +126,7 @@ if __name__ == '__main__':
 
         if commands.chart_type == 'sankey':
             chart = SankeyChart(kreport_processor.kreport, commands)
-        if commands.chart_type == 'sunburst':
+        if commands.chart_type in (SUNBURST_NO_VALUES, SUNBURST_VALUES):
             chart = SunBurstChart(kreport_processor.kreport, commands)
         chart.plot()
 
