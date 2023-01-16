@@ -5,7 +5,9 @@ The following charts are available:
 
 * sankey
 * sunburst_no_values
-* sunburst_values (see the sample_files).
+* sunburst_values
+
+There are some chart examples at samples_files folder.
 
 It is possible to show all domains, or select some domain to show (Viruses, Bacteria, Archaea or Eukarya).
 You can also apply filters such as minimum reads/contigs and exclude taxons.
