@@ -45,6 +45,7 @@ Use the following command to see all the options:
 * 0.0.2: add project info
 * 1.0.0: add sunburst chart
 * 1.1.0: add sunburst_values and sunburst_no_values charts, fix sunburst values to child values and all domains.
+* 1.1.1: style fixes
 
 #### Usage as a command line tool
 
