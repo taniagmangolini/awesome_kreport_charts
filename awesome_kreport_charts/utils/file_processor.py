@@ -4,8 +4,8 @@ import pandas as pd
 # imports from other files
 try:
     from models.command import CommandSet
-except ImportError as e:
-   from ..models.command import CommandSet
+except ImportError:
+    from ..models.command import CommandSet
 
 
 class KreportProcessor(object):
@@ -28,11 +28,16 @@ class KreportProcessor(object):
                                      'level',
                                      'taxid',
                                      'taxon_name'])
-        kreport['taxon_name'] = kreport['taxon_name'].apply(lambda x: x.strip())
+        kreport['taxon_name'] = kreport['taxon_name']\
+            .apply(lambda x: x.strip())
         kreport['taxon'] = kreport['taxid'].astype(str) \
-                           + '-' \
-                           + kreport['taxon_name'].astype(str)
-        kreport = kreport[['taxon', 'taxid', 'taxon_name', 'level', 'tot_taxon']]
+            + '-' \
+            + kreport['taxon_name'].astype(str)
+        kreport = kreport[['taxon',
+                           'taxid',
+                           'taxon_name',
+                           'level',
+                           'tot_taxon']]
         kreport.set_index('taxon', inplace=True)
 
         self.kreport = kreport

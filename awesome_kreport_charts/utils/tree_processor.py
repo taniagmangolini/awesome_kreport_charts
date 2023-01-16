@@ -6,7 +6,7 @@ try:
     from models.tree import Tree
     from utils.constants import LEVEL_ORDER, DOMAINS, ROOT_LEVEL, VIRUSES,\
         BACTERIA, ARCHAEA, EUKARYA
-except ImportError as e:
+except ImportError:
     from ..models.tree import Tree
     from ..utils.constants import LEVEL_ORDER, DOMAINS, ROOT_LEVEL, VIRUSES,\
         BACTERIA, ARCHAEA, EUKARYA
@@ -63,14 +63,14 @@ class TreeProcessor(object):
         if they dont pass the filters."""
 
         min_level = self.commands.min_level
-        if node.lvl_reads < min_quantity \
-            or node.taxid in self.commands.excluded_nodes \
-                or LEVEL_ORDER[node.level] > LEVEL_ORDER[min_level]:
-                    node.excluded = True
-                    for child in node.children:
-                        if child.taxid not in self.commands.excluded_nodes:
-                            self.commands.excluded_nodes.append(child.taxid)
-                            self._check_node_exclusion(child, min_quantity)
+        if (node.lvl_reads < min_quantity
+                or node.taxid in self.commands.excluded_nodes
+                or LEVEL_ORDER[node.level] > LEVEL_ORDER[min_level]):
+            node.excluded = True
+            for child in node.children:
+                if child.taxid not in self.commands.excluded_nodes:
+                    self.commands.excluded_nodes.append(child.taxid)
+                    self._check_node_exclusion(child, min_quantity)
 
     def _filter_nodes(self, selected_nodes, min_reads):
         """Apply min reads, min level and taxids exclusion filters."""

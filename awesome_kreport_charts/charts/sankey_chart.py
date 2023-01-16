@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 # imports from other files
 try:
     from utils.tree_processor import TreeProcessor
-except ImportError as e:
+except ImportError:
     from ..utils.tree_processor import TreeProcessor
 
 
@@ -22,7 +22,9 @@ class SankeyChart(object):
         """Generate the Sankey Chart and export to a HTML file in the
         output path."""
 
-        labels, sources, targets, values = self.tree_processor.prepare_nodes(self.commands.domain)
+        labels, sources, targets, values = self.tree_processor.prepare_nodes(
+            self.commands.domain)
+
         params = {'labels': list(labels.values()),
                   'sources': sources,
                   'targets': targets,
@@ -34,18 +36,19 @@ class SankeyChart(object):
                      targets, {len(targets)}')
 
         fig = go.Figure(data=[go.Sankey(
-            node = dict(
-                pad = 15,
-                thickness = 5,
-                line = dict(color = "black", width = 0.5),
-                label = params['labels'],
-                hovertemplate = '%{label}: %{value}<extra></extra>'
+            node=dict(
+                pad=15,
+                thickness=5,
+                line=dict(color="black", width=0.5),
+                label=params['labels'],
+                hovertemplate='%{label}: %{value}<extra></extra>'
             ),
-            link = dict(
-                source = params['sources'],
-                target = params['targets'],
-                value = params['values'],
-                hovertemplate = '%{source.label}-> %{target.label}<extra></extra>'
+            link=dict(
+                source=params['sources'],
+                target=params['targets'],
+                value=params['values'],
+                hovertemplate='%{source.label}-> \
+                    %{target.label}<extra></extra>'
             ))
         ])
         fig.update_layout(font_size=9)

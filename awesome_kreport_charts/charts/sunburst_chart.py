@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 try:
     from utils.tree_processor import TreeProcessor
     from utils.constants import SUNBURST_VALUES, DOMAINS, EUKARYOTA
-except ImportError as e:
+except ImportError:
     from ..utils.tree_processor import TreeProcessor
     from ..utils.constants import SUNBURST_VALUES, DOMAINS, EUKARYOTA
 
@@ -24,11 +24,11 @@ class SunBurstChart(object):
         """Add root if chart should include all domains."""
         for domain in [*DOMAINS, *[EUKARYOTA]]:
             if domain in sources_labels:
-                sources_labels= [*['root'], *sources_labels]
-                targets_labels=[*[domain], *targets_labels]
+                sources_labels = [*['root'], *sources_labels]
+                targets_labels = [*[domain], *targets_labels]
                 for node in self.tree_processor.nodes:
                     if node.name == domain:
-                        values=[*[node.lvl_reads], *values]
+                        values = [*[node.lvl_reads], *values]
                         break
         return sources_labels, targets_labels, values
 
@@ -43,9 +43,10 @@ class SunBurstChart(object):
         targets_labels = [labels[target] for target in targets]
 
         if self.commands.domain is None:
-            sources_labels, targets_labels, values = self.add_root(sources_labels,
-                                                                   targets_labels,
-                                                                   values)
+            sources_labels, targets_labels, values = self.add_root(
+                sources_labels,
+                targets_labels,
+                values)
 
         logging.info(f'sources_labels, {len(sources_labels)}, \
                      targets_labels, {len(targets_labels)}')
@@ -69,8 +70,8 @@ class SunBurstChart(object):
             ))
 
         fig.update_layout(
-            grid = dict(columns=2, rows=1),
-            margin = dict(t=0, l=0, r=0, b=0)
+            grid=dict(columns=2, rows=1),
+            margin=dict(t=0, l=0, r=0, b=0)
         )
 
         fig.write_html(self.commands.output_path)

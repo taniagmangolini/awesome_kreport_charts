@@ -4,11 +4,11 @@
 
 __autor__ = "Tania Girao Mangolini"
 __credits__ = ["Tania Girao Mangolini"]
-__License__ = "BSD0"
+__License__ = "BSD"
 __mantainer__ = "Tania Girao Mangolini"
-__email__= "taniagmangolini@gmail.com"
-__status__= "Production"
-__version__= "1.1.0"
+__email__ = "taniagmangolini@gmail.com"
+__status__ = "Production"
+__version__ = "1.1.1"
 
 # Default python packages
 import argparse
@@ -59,32 +59,37 @@ parser.add_argument('-me',
 parser.add_argument('-d',
                     '--domain',
                     choices=["V", "B", "A", "E"],
-                    help='Domains to include: V (Viruses), B (Bacteria), A (Archaea), \
-                    E (Eukarya). Default: include all domains. Example of Usage: -d V')
+                    help='Domains to include: V (Viruses),\
+                        B (Bacteria), A (Archaea), \
+                        E (Eukarya). Default: include all domains. \
+                        Example of Usage: -d V')
 
 parser.add_argument('-e',
                     '--exclude',
                     nargs='*',
                     type=int,
-                    help='One or more taxon id to be ignored (use spaces for more than one). \
+                    help='One or more taxon id to be ignored \
+                    (use spaces for more than one). \
                     Example of usage: -e 9606 247 -- ')
 
 parser.add_argument('-ml',
                     '--min_level',
                     choices=['D', 'K', 'P', 'C', 'O', 'F', 'G', 'S'],
                     default='S',
-                    help='Minimum level to show (D=Domain, K=Kingdom, P=Phyllum, \
-                    C=Class, O=order, F=Family, G=Genus, S=Species). Default: S.')
+                    help='Minimum level to show: \
+                    (D=Domain, K=Kingdom, P=Phyllum, \
+                    C=Class, O=order, F=Family, G=Genus, S=Species). \
+                    Default: S.')
 
 parser.add_argument('-c',
                     '--chart_type',
-                    choices=['sankey', 'sunburst_no_values', 'sunburst_values'],
+                    choices=['sankey',
+                             'sunburst_no_values',
+                             'sunburst_values'],
                     default='sankey',
-                    help='Chart type. Options: sankey, sunburst-no-values, sunburst-values.\
-                          Default: sankey.\
-                          Sunbust is only supported for Viruses, Bacteria, Archaea or \
-                          Eukarya.The support to show all domains chart will be \
-                          available soon. ')
+                    help='Chart type. Options: \
+                          sankey, sunburst-no-values or sunburst-values.\
+                          Default: sankey.')
 
 parser.add_argument('-o',
                     '--output_path',
@@ -110,9 +115,10 @@ if not args.output_path:
 if __name__ == '__main__':
 
     try:
+        excluded_nodes = args.exclude if args.exclude else []
         commands = CommandSet(kreport_file=Path(args.kreport_path),
                               domain=args.domain,
-                              excluded_nodes=args.exclude if args.exclude else [],
+                              excluded_nodes=excluded_nodes,
                               min_viruses=args.min_viruses,
                               min_bacteria=args.min_bacteria,
                               min_archaea=args.min_archaea,
