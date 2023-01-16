@@ -41,7 +41,7 @@ Use the following command to see all the options:
 
 #### Usage as a command line tool
 
-```python3 awesome_kreport_charts -mb 10000 --exclude 9606 8959 -o sample_files/sankey.html -- sample_files/sample.kreport```
+```python3 awesome_kreport_charts -mb 1000 -mv 5 --exclude 9606 8959 -o sample_files/sankey-all.html -- sample_files/sample.kreport```
 
 ```python3 awesome_kreport_charts --min_bacteria 10  --chart sunburst_no_values -o sample_files/sunburst__no_values_all.html -- sample_files/sample.kreport```
 
