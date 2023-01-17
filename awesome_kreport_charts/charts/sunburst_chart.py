@@ -6,14 +6,16 @@ import plotly.graph_objects as go
 
 # imports from other files
 try:
+    from charts.chart import Chart
     from utils.tree_processor import TreeProcessor
     from utils.constants import SUNBURST_VALUES, DOMAINS, EUKARYOTA
 except ImportError:
+    from ..charts.chart import Chart
     from ..utils.tree_processor import TreeProcessor
     from ..utils.constants import SUNBURST_VALUES, DOMAINS, EUKARYOTA
 
 
-class SunBurstChart(object):
+class SunBurstChart(Chart):
     """SunBurst chart processor."""
 
     def __init__(self, kreport, commands):

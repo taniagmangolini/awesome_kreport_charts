@@ -8,7 +8,7 @@ __License__ = "BSD"
 __mantainer__ = "Tania Girao Mangolini"
 __email__ = "taniagmangolini@gmail.com"
 __status__ = "Production"
-__version__ = "1.1.1"
+__version__ = "1.1.2"
 
 # Default python packages
 import argparse

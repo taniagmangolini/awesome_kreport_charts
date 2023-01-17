@@ -6,12 +6,14 @@ import plotly.graph_objects as go
 
 # imports from other files
 try:
+    from charts.chart import Chart
     from utils.tree_processor import TreeProcessor
 except ImportError:
+    from ..charts.chart import Chart
     from ..utils.tree_processor import TreeProcessor
 
 
-class SankeyChart(object):
+class SankeyChart(Chart):
     """Sankey chart processor."""
 
     def __init__(self, kreport, commands):

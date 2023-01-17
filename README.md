@@ -14,6 +14,20 @@ You can also apply filters such as minimum reads/contigs and exclude taxons.
 
 To know more about kreports: https://ccb.jhu.edu/software/kraken/MANUAL.html#output-format
 
+#### Multi Kreport File
+
+It is possible to generate a consolidate kreport file from multiple samples using the following script:
+
+https://github.com/jenniferlu717/KrakenTools/blob/master/combine_kreports.py
+
+Example of usage:
+
+Download the merging script at https://raw.githubusercontent.com/jenniferlu717/KrakenTools/master/combine_kreports.py and run the following command (adapt the command to your sample files):
+
+```python combine_kreports.py --only-combined  --no-headers --report-files sample1.kreport sample_2.kreport sample_3.kreport -o merged.kreport```
+
+The consolidated kreport can be used as input for awesome_kreports_charts tool.
+
 
 #### Instalation
 
@@ -46,6 +60,7 @@ Use the following command to see all the options:
 * 1.0.0: add sunburst chart
 * 1.1.0: add sunburst_values and sunburst_no_values charts, fix sunburst values to child values and all domains.
 * 1.1.1: style fixes
+* 1.1.2: add chart abstract class and merging kreports option.
 
 #### Usage as a command line tool
 
