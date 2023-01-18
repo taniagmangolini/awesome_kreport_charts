@@ -6,6 +6,7 @@ The following charts are available:
 * sankey
 * sunburst_no_values
 * sunburst_values
+* treemap
 
 There are some chart examples at samples_files folder.
 
@@ -35,7 +36,7 @@ The consolidated kreport can be used as input for awesome_kreports_charts tool.
 
 ```pip install awesome-kreport-charts```
 
-More info: https://pypi.org/project/awesome-kreport-charts/1.1.0/
+More info: https://pypi.org/project/awesome-kreport-charts/1.2.0/
 
 ##### Install from source:
 
@@ -61,15 +62,17 @@ Use the following command to see all the options:
 * 1.1.0: add sunburst_values and sunburst_no_values charts, fix sunburst values to child values and all domains.
 * 1.1.1: style fixes
 * 1.1.2: add chart abstract class and merging kreports option.
+* 1.2.0: add chart treemap chart.
 
 #### Usage as a command line tool
 
 ```python3 awesome_kreport_charts -mb 1000 -mv 5 --exclude 9606 8959 -o sample_files/sankey-all.html -- sample_files/sample.kreport```
 
-```python3 awesome_kreport_charts --min_bacteria 10  --chart sunburst_no_values -o sample_files/sunburst__no_values_all.html -- sample_files/sample.kreport```
+```python3 awesome_kreport_charts --min_bacteria 10  --c sunburst_no_values -o sample_files/sunburst__no_values_all.html -- sample_files/sample.kreport```
 
-```python3 awesome_kreport_charts --min_bacteria 10  --chart sunburst_values -o sample_files/sunburst__values_all.html -- sample_files/sample.kreport```
+```python3 awesome_kreport_charts --min_bacteria 10  --c sunburst_values -o sample_files/sunburst__values_all.html -- sample_files/sample.kreport```
 
+```python3 awesome_kreport_charts --min_bacteria 10  --c treemap -o sample_files/treemap__all.html -- sample_files/sample.kreport```
 
 #### Import as a package
 

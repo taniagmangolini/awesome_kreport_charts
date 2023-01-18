@@ -8,7 +8,7 @@ __License__ = "BSD"
 __mantainer__ = "Tania Girao Mangolini"
 __email__ = "taniagmangolini@gmail.com"
 __status__ = "Production"
-__version__ = "1.1.2"
+__version__ = "1.2.0"
 
 # Default python packages
 import argparse
@@ -19,6 +19,7 @@ from pathlib import Path
 from utils.file_processor import KreportProcessor
 from charts.sankey_chart import SankeyChart
 from charts.sunburst_chart import SunBurstChart
+from charts.treemap_chart import TreeMapChart
 
 from models.command import CommandSet
 from utils.constants import SUNBURST_NO_VALUES, SUNBURST_VALUES
@@ -85,10 +86,11 @@ parser.add_argument('-c',
                     '--chart_type',
                     choices=['sankey',
                              'sunburst_no_values',
-                             'sunburst_values'],
+                             'sunburst_values',
+                             'treemap'],
                     default='sankey',
                     help='Chart type. Options: \
-                          sankey, sunburst-no-values or sunburst-values.\
+                          sankey, sunburst-no-values, sunburst-values and treemap.\
                           Default: sankey.')
 
 parser.add_argument('-o',
@@ -134,6 +136,8 @@ if __name__ == '__main__':
             chart = SankeyChart(kreport_processor.kreport, commands)
         if commands.chart_type in (SUNBURST_NO_VALUES, SUNBURST_VALUES):
             chart = SunBurstChart(kreport_processor.kreport, commands)
+        if commands.chart_type == 'treemap':
+            chart = TreeMapChart(kreport_processor.kreport, commands)
         chart.plot()
 
     except Exception as e:
