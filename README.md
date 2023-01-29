@@ -8,7 +8,7 @@ The following charts are available:
 * sunburst_values
 * treemap
 
-There are some chart examples at samples_files folder.
+There are some chart examples at the samples_files folder.
 
 It is possible to show all domains, or select some domain to show (Viruses, Bacteria, Archaea or Eukarya).
 You can also apply filters such as minimum reads/contigs and exclude taxons.
@@ -17,7 +17,7 @@ To know more about kreports: https://ccb.jhu.edu/software/kraken/MANUAL.html#out
 
 #### Multi Kreport File
 
-It is possible to generate a consolidate kreport file from multiple samples using the following script:
+It is possible to generate a consolidated kreport file from multiple samples using the following script:
 
 https://github.com/jenniferlu717/KrakenTools/blob/master/combine_kreports.py
 
